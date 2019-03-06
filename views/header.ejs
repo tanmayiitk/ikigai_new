@@ -29,7 +29,7 @@
   <!-- Main Stylesheet File -->
   <!-- <link href="css/style.css" rel="stylesheet"> -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="css/my-login.css">
 
 
@@ -46,9 +46,9 @@
  
 </head>
 
-<body class="my-login-page">
+<body >
 
-  <!--==========================
+  <!-- ==========================
   Header
   ============================-->
   <header id="header" class="fixed-top" style="height:100px; ">
@@ -66,8 +66,8 @@
           <li class="active"><a href="/" style="padding-top: 20px;">Home</a></li>
           <li><a href="/home" style="padding-top: 20px;">How it Works!</a></li>
           <li><a href="/home#portfolio" style="padding-top: 20px;">Programs</a></li>
-          <!-- <li><a href="#team">Team</a></li> -->
-          <!-- <li class="drop-down" style=""><a href="">Drop Down</a>
+           <!-- <li><a href="#team">Team</a></li> -->
+          <!--  <li class="drop-down" style=""><a href="">Drop Down</a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="drop-down"><a href="#">Drop Down 2</a>
@@ -83,21 +83,20 @@
               <li><a href="#">Drop Down 4</a></li>
               <li><a href="#">Drop Down 5</a></li>
             </ul>
-          </li> -->
+          </li>  -->
           <li><a href="aboutUs" style="padding-top: 20px;">About Us</a></li>
           <li><a href="signup" style="padding-top: 20px;"><strong>Register for DSAT</strong></a></li>
-          <li><a href="faq" style="padding-top: 20px;">FAQ</a></li>
-         
-          <% if(!user){ %>
+          <li><a href="faq" style="padding-top: 20px;">FAQ</a></li> 
+           <% if(!user){ %>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item <%= (title === 'Login') ? 'active' : undefined %>" style="padding-top: 10px;"><a class="nav-link" href="/login">Sign In</a></li>
                 <% } else { %>
-                <li class="dropdown  nav-item ">
-                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown" style="padding-top: 20px;">
+                <li class="drop-down  nav-item <%= (title === 'Account Management') ? 'active' : undefined %>">
+                    <a class="dropdown nav-link" href="" data-toggle="dropdown" style="padding-top: 20px;">
                         <% if(user.profile.picture){ %>
                         <img src="<%=user.profile.picture%>"/>
                         <% } else { %>
-                        <img src="<%= user.gravatar(40) %>"/>
+                        <img src="<%= user.gravatar(30) %>"/>
                         <% } %>
                         <span><%= user.profile.name || user.email || user.id %></span>
                         <i class="caret"></i>
@@ -110,9 +109,11 @@
                 </li>
                 <% } %>
             </ul>
-      <!--     <li><a href="login" style="padding-top: 20px;">Sign In</a></li> -->
-        </ul>
-      </nav><!-- .main-nav -->
+         <!--  <li><a href="login" style="padding-top: 20px;">Sign In</a></li>  -->
+       </ul>
+      </nav> <!-- .main-nav -->
+
+
       
     </div>
   </header><!-- #header -->
