@@ -302,6 +302,7 @@ h6 {
 
 .main-nav .drop-down li {
   min-width: 180px;
+ 
   position: relative;
 }
 
@@ -448,6 +449,11 @@ h6 {
 .mobile-nav-active .mobile-nav-toggle i {
   color: #fff;
 }
+
+
+
+
+
 
 /*--------------------------------------------------------------
 # Sections

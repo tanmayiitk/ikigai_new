@@ -29,7 +29,7 @@
   <!-- Main Stylesheet File -->
   <!-- <link href="css/style.css" rel="stylesheet"> -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+<!--   <link rel="stylesheet" type="text/css" href="css/main.css"> -->
   <link rel="stylesheet" type="text/css" href="css/my-login.css">
 
 
@@ -91,8 +91,8 @@
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item <%= (title === 'Login') ? 'active' : undefined %>" style="padding-top: 10px;"><a class="nav-link" href="/login">Sign In</a></li>
                 <% } else { %>
-                <li class="drop-down  nav-item <%= (title === 'Account Management') ? 'active' : undefined %>">
-                    <a class="dropdown nav-link" href="" data-toggle="dropdown" style="padding-top: 20px;">
+                <li class="drop-down">
+                    <a href="" style="padding-top: 20px;">
                         <% if(user.profile.picture){ %>
                         <img src="<%=user.profile.picture%>"/>
                         <% } else { %>
@@ -101,10 +101,9 @@
                         <span><%= user.profile.name || user.email || user.id %></span>
                         <i class="caret"></i>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="/account">My Account</a></li>
-                        <li class="divider dropdown-item"></li>
-                        <li class="dropdown-item"><a href="/logout">Logout</a></li>
+                    <ul>
+                        <li><a href="/account" onclick="console.log("Hello");">My Account</a></li>
+                        <li><a href="/logout">Logout</a></li>
                     </ul>
                 </li>
                 <% } %>
