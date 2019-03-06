@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The IkiGai Lab</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token">
+
+  <!-- Favicons -->
+  <!-- <link href="img/favicon.png" rel="icon"> -->
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <!-- <link href="css/style.css" rel="stylesheet"> -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/my-login.css">
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135010940-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135010940-1');
+</script>
+ 
+</head>
+
+<body class="my-login-page">
+
+  <!--==========================
+  Header
+  ============================-->
+  <header id="header" class="fixed-top" style="height:100px; ">
+    <div class="container">
+
+
+      <div class="logo float-left">
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
+        <a href="#intro" class="scrollto"><img src="img/ikigai_logo.png" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav class="main-nav float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="/" style="padding-top: 20px;">Home</a></li>
+          <li><a href="/home" style="padding-top: 20px;">How it Works!</a></li>
+          <li><a href="/home#portfolio" style="padding-top: 20px;">Programs</a></li>
+          <!-- <li><a href="#team">Team</a></li> -->
+          <!-- <li class="drop-down" style=""><a href="">Drop Down</a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="drop-down"><a href="#">Drop Down 2</a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="#">Drop Down 5</a></li>
+            </ul>
+          </li> -->
+          <li><a href="aboutUs" style="padding-top: 20px;">About Us</a></li>
+          <li><a href="signup" style="padding-top: 20px;"><strong>Register for DSAT</strong></a></li>
+          <li><a href="faq" style="padding-top: 20px;">FAQ</a></li>
+         
+          <% if(!user){ %>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item <%= (title === 'Login') ? 'active' : undefined %>" style="padding-top: 10px;"><a class="nav-link" href="/login">Sign In</a></li>
+                <% } else { %>
+                <li class="dropdown  nav-item ">
+                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown" style="padding-top: 20px;">
+                        <% if(user.profile.picture){ %>
+                        <img src="<%=user.profile.picture%>"/>
+                        <% } else { %>
+                        <img src="<%= user.gravatar(40) %>"/>
+                        <% } %>
+                        <span><%= user.profile.name || user.email || user.id %></span>
+                        <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="/account">My Account</a></li>
+                        <li class="divider dropdown-item"></li>
+                        <li class="dropdown-item"><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+                <% } %>
+            </ul>
+      <!--     <li><a href="login" style="padding-top: 20px;">Sign In</a></li> -->
+        </ul>
+      </nav><!-- .main-nav -->
+      
+    </div>
+  </header><!-- #header -->
