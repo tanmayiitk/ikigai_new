@@ -129,7 +129,6 @@ h6 {
   transition: all 0.5s;
   z-index: 997;
   transition: all 0.5s;
-  padding: 20px 0;
   background: #fff;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.3);
 }
@@ -164,9 +163,18 @@ h6 {
 }
 
 .main-pages {
-  margin-top: 60px;
+  margin-top: 50px;
 }
+.navbar-nav .active > .nav-link{
+  color: #004289;
 
+}
+.navbar-light .navbar-nav .nav-link {
+  font
+}
+#header #navbarSupportedContent {
+text-decoration-color: #004289;
+}
 /*--------------------------------------------------------------
 # Intro Section
 --------------------------------------------------------------*/
@@ -250,7 +258,7 @@ h6 {
 }
 
 .main-nav,
-.main-nav * {
+.main-nav  {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -264,7 +272,7 @@ h6 {
 
 .main-nav a {
   display: block;
-  position: relative;
+  position: absolute;
   color: #004289;
   padding: 10px 15px;
   transition: 0.3s;
@@ -280,7 +288,7 @@ h6 {
   text-decoration: none;
 }
 
-.main-nav .drop-down ul {
+.main-nav .dropdown ul {
   display: block;
   position: absolute;
   left: 0;
@@ -294,52 +302,52 @@ h6 {
   transition: ease all 0.3s;
 }
 
-.main-nav .drop-down:hover > ul {
+.main-nav .dropdown:hover > ul {
   opacity: 1;
   top: 100%;
   visibility: visible;
 }
 
-.main-nav .drop-down li {
+.main-nav .dropdown li {
   min-width: 180px;
  
   position: relative;
 }
 
-.main-nav .drop-down ul a {
+.main-nav .dropdown ul a {
   padding: 10px 20px;
   font-size: 13px;
   color: #004289;
 }
 
-.main-nav .drop-down ul a:hover,
-.main-nav .drop-down ul .active > a,
-.main-nav .drop-down ul li:hover > a {
+.main-nav .dropdown ul a:hover,
+.main-nav .dropdown ul .active > a,
+.main-nav .dropdown ul li:hover > a {
   color: #007bff;
 }
 
-.main-nav .drop-down > a:after {
+.main-nav .dropdown > a:after {
   content: "\f107";
   font-family: FontAwesome;
   padding-left: 10px;
 }
 
-.main-nav .drop-down .drop-down ul {
+.main-nav .dropdown .dropdown ul {
   top: 0;
   left: calc(100% - 30px);
 }
 
-.main-nav .drop-down .drop-down:hover > ul {
+.main-nav .dropdown .dropdown:hover > ul {
   opacity: 1;
   top: 0;
   left: 100%;
 }
 
-.main-nav .drop-down .drop-down > a {
+.main-nav .dropdown .dropdown > a {
   padding-right: 35px;
 }
 
-.main-nav .drop-down .drop-down > a:after {
+.main-nav .dropdown .dropdown > a:after {
   content: "\f105";
   position: absolute;
   right: 15px;

@@ -1,16 +1,17 @@
 {
-  "name": "hackathon-starter",
-  "version": "5.1.2",
-  "description": "A boilerplate for Node.js web applications",
+  "name": "ikigai",
+  "version": "1.0.2",
+  "description": "A Node.js web App for IKIGAI Labs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sahat/hackathon-starter.git"
+    "url": ""
   },
-  "author": "Sahat Yalkabov",
+  "author": "Tanmay Yasharth",
   "license": "MIT",
   "scripts": {
     "postinstall": "npm rebuild node-sass",
     "start": "node app.js",
+    "server": "nodemon index.js",
     "test": "nyc mocha --timeout=10000 --exit",
     "lint": "eslint \"**/*.js\""
   },
@@ -90,9 +91,9 @@
     "npm": ">=5.6.0"
   },
   "bugs": {
-    "url": "https://github.com/sahat/hackathon-starter/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/sahat/hackathon-starter#readme",
+  "homepage": "",
   "main": "app.js",
   "directories": {
     "test": "test"

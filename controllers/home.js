@@ -7,3 +7,6 @@ exports.index = (req, res) => {
     title: 'Home'
   });
 };
+exports.home = (req, res) => {
+  res.redirect('home');
+};

@@ -2,8 +2,8 @@
 <div class="alert alert-danger fade show">
  <button class="close" type="button" data-dismiss="alert">
     <i class="far fa-times-circle"></i></button>
-   <% for (var error in messages.errors) {%>
-    <div ><%= error.msg%></div>
+   <% for(var i=0; i < (messages.errors).length; i++) {%>
+    <div ><%=messages.errors[i].msg %></div>
     <% } %>
   </button>
 </div>
@@ -13,8 +13,8 @@
 <div class="alert alert-info fade show">
  <button class="close" type="button" data-dismiss="alert">
     <i class="far fa-times-circle"></i></button>
-   <% for (var info in messages.info) {%>
-    <div ><%= info.msg%></div>
+   <% for(var i=0; i < (messages.info).length; i++) {%>
+    <div ><%= messages.info[i].msg %></div>
     <% } %>
 </div>
 <% } %>
@@ -23,8 +23,8 @@
 <div class="alert alert-success fade show">
  <button class="close" type="button" data-dismiss="alert">
     <i class="far fa-times-circle"></i> </button>
-   <% for (var success in messages.success) {%>
-    <div ><%= success.msg%></div>
+   <% for(var i=0; i < (messages.success).length; i++) {%>
+    <div ><%=messages.success[i].msg %></div>
     <% } %>
 </div>
 <% } %>
