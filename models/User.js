@@ -19,13 +19,21 @@ const userSchema = new mongoose.Schema({
   tokens: Array,
 
   profile: {
-    name: String,
+    firstname: String,
+    lastname: String,
+    age : Number,
+    mobile: Number,
     gender: String,
     location: String,
+    qualification: String,
+    percentage:String,
+    skills : String,
+    experience : String,
     website: String,
     picture: String
   }
 }, { timestamps: true });
+
 
 /**
  * Password hash middleware.

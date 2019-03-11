@@ -149,6 +149,16 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/faq', function(req,res){res.render('faq', {title : "FAQ"});});
 app.get('/aboutUs', function(req,res){res.render('aboutUs', {title: "aboutUs"});});
+app.get('/dsat',function(req,res){  
+  if(req.isAuthenticated()) {
+   res.render('dsat', {title: "aboutUs"});
+  } else {
+  res.redirect("/login");
+}
+  
+});
+app.get('/aboutUs', function(req,res){res.render('aboutUs', {title: "aboutUs"});});
+
 
 
 /**

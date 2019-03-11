@@ -25,7 +25,8 @@
   <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- <link href="lib/font-awesome/css/fontawesome.min.css" rel="stylesheet"> -->
   <link href="lib/animate/animate.min.css" rel="stylesheet">
   <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -61,20 +62,20 @@
 
 
       <div class="logo float-left">
-        <a href="#intro" class="scrollto"><img src="img/ikigai_logo.png" alt="" class="img-fluid"></a>
+        <a href="/" class="scrollto"><img src="img/ikigai_logo.png" alt="" class="img-fluid"></a>
       </div>
 
-      <nav class="main-nav float-right d-none d-lg-block">
+      <nav class="main-nav  float-right d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/" style="padding-top: 20px;">Home</a></li>
-          <li><a href="/#services" style="padding-top: 20px;">How it Works!</a></li>
-          <li><a href="/#portfolio" style="padding-top: 20px;">Programs</a></li>
-          <li><a href="aboutUs" style="padding-top: 20px;">About Us</a></li>
-          <li><a href="signup" style="padding-top: 20px;"><strong>Register for DSAT</strong></a></li>
-          <li><a href="faq" style="padding-top: 20px;">FAQ</a></li> 
+          <li class="active"><a href="/" style="padding-top: 15px;">Home</a></li>
+          <li><a href="/#services"style="padding-top: 15px;" >How it Works!</a></li>
+          <li><a href="/#portfolio"style="padding-top: 15px;">Programs</a></li>
+          <li><a href="aboutUs" style="padding-top: 15px;">About Us</a></li>
+          <li><a href="/dsat" style="padding-top: 15px;"><strong>Register for DSAT</strong></a></li>
+          <li><a href="faq" style="padding-top: 15px;">FAQ</a></li> 
            <% if(!user){ %>
              <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item <%= (title === 'Login') ? 'active' : undefined %>" style="padding-top: 10px;">
+                <li class="nav-item <%= (title === 'Login') ? 'active' : undefined %>" style="padding-top: 5px;">
                   <a class="nav-link" href="/login">Sign In</a>
                 </li>
                 <% } else { %>
@@ -85,7 +86,7 @@
                         <% } else { %>
                         <img src="<%= user.gravatar(30) %>"/>
                         <% } %>
-                        <span><%= user.profile.name || user.email || user.id %></span>                         
+                        <span><%= user.profile.firstname || user.email || user.id %></span>                         
                        </a>
                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/account">My Account</a>

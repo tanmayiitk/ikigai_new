@@ -145,10 +145,19 @@ exports.postUpdateProfile = (req, res, next) => {
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
+    user.profile.firstname = req.body.firstname || '';
+
+    user.profile.lastname = req.body.lastname || '';
+    user.profile.age = req.body.age || '';
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
+    user.profile.mobile = req.body.mobile || '';
+    user.profile.qualification = req.body.qualification || '';
+    user.profile.percentage = req.body.percentage || '';
+    user.profile.experience = req.body.experience || '';
     user.profile.website = req.body.website || '';
+    console.log(req.body.firstname);
+    console.log(user.profile.firstname);
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
