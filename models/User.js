@@ -17,8 +17,10 @@ const userSchema = new mongoose.Schema({
   linkedin: String,
   steam: String,
   tokens: Array,
+  testarray: [Number],
 
-  profile: {
+  profile: 
+  {
     firstname: String,
     lastname: String,
     age : Number,
@@ -30,7 +32,18 @@ const userSchema = new mongoose.Schema({
     skills : String,
     experience : String,
     website: String,
-    picture: String
+    picture: String,
+    scores: [Number],
+  },
+
+  dsat: 
+  {
+    attempts: { type: Number, default: 0 },
+    scores: [Number],
+    conductedOn: Array,
+    maximum: Number,
+    minimum: Number,
+    average: Number,
   }
 }, { timestamps: true });
 

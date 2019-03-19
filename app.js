@@ -27,7 +27,7 @@ const upload = multer({ dest: path.join(__dirname, 'uploads') });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-// dotenv.load({ path: '.env.example' });
+dotenv.load({ path: '.env.example' });
 
 /**
  * Controllers (route handlers).
@@ -148,6 +148,8 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/faq', function(req,res){res.render('faq', {title : "FAQ"});});
+app.get('/dashboard', function(req,res){res.render('account/dashboard', {title : "Dashboard"});});
+app.get('/dash', function(req,res){res.render('account/dash', {title : "Dashboard"});});
 app.get('/aboutUs', function(req,res){res.render('aboutUs', {title: "aboutUs"});});
 app.get('/dsat',function(req,res){  
   if(req.isAuthenticated()) {
