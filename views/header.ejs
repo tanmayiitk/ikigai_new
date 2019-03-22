@@ -82,7 +82,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px !important;">
                       <% if(user.profile.picture){ %>
-                        <img src="<%=user.profile.picture%>"/>
+                        <img src="<%=user.profile.picture%>" width="37" height="37"/>
                         <% } else { %>
                         <img src="<%= user.gravatar(30) %>"/>
                         <% } %>
