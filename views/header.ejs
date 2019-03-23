@@ -10,8 +10,8 @@
   <meta name="csrf-token">
 
   <!-- Favicons -->
-  <!-- <link href="img/favicon.png" rel="icon"> -->
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/favicon.png" rel="apple-touch-icon">
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   
   <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -88,9 +88,9 @@
                         <% } %>
                         <span><%= user.profile.firstname || user.email || user.id %></span>                         
                        </a>
-                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #132739;">
+                       <a class="dropdown-item" href="/dash" >Dashboard</a>
                         <a class="dropdown-item" href="/account">My Account</a>
-                        <a class="dropdown-item" href="/profile">Dashboard</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Logout</a>
                       </div>

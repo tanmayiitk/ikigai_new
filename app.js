@@ -148,9 +148,15 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/faq', function(req,res){res.render('faq', {title : "FAQ"});});
-app.get('/dashboard', function(req,res){res.render('account/dashboard', {title : "Dashboard"});});
-app.get('/dash', function(req,res){res.render('account/dash', {title : "Dashboard"});});
 app.get('/aboutUs', function(req,res){res.render('aboutUs', {title: "aboutUs"});});
+app.get('/dash',function(req,res){  
+  if(req.isAuthenticated()) {
+   res.render('account/dash', {title : "Dashboard"});
+  } else {
+  res.redirect("/login");
+}
+  
+});
 app.get('/dsat',function(req,res){  
   if(req.isAuthenticated()) {
    res.render('dsat', {title: "aboutUs"});
