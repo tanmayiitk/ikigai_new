@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema({
   linkedin: String,
   steam: String,
   tokens: Array,
-  testarray: [Number],
 
   profile: 
   {
@@ -41,9 +40,9 @@ const userSchema = new mongoose.Schema({
     attempts: { type: Number, default: 0 },
     scores: [Number],
     conductedOn: Array,
-    maximum: Number,
-    minimum: Number,
-    average: Number,
+    maximum: {type: Number,default:0},
+    minimum: {type: Number, default: 0},
+    average: { type:  Number,default:0},
   }
 }, { timestamps: true });
 

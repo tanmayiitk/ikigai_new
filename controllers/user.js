@@ -157,42 +157,12 @@ exports.postUpdateProfile = (req, res, next) => {
     user.profile.percentage = req.body.percentage || '';
     user.profile.experience = req.body.experience || '';
     user.profile.website = req.body.website || '';   
-    user.testarray.push(req.body.testarray);
-    user.dsat.scores.push(req.body.score);
+   // user.testarray.push(req.body.testarray);
+   // user.dsat.scores.push(req.body.score);
 
-    user.dsat.conductedOn.push(req.body.score);
+  //  user.dsat.conductedOn.push(req.body.score);
 
-    user.dsat.attempts= user.dsat.attempts + 1;
-
-    {var sum = 0;
-    for(var i=0;i< user.dsat.scores.length; i++){
-      sum = sum +parseInt(user.dsat.scores[i]);
-      
-    }
-    user.dsat.average = sum / user.dsat.attempts;
-    user.dsat.average=user.dsat.average.toFixed(3);
-    }
-    {
-      var max=parseInt(user.dsat.scores[0]);
-      for(var i=0;i< user.dsat.scores.length; i++){
-        if(parseInt(user.dsat.scores[i])> max){
-          max=parseInt(user.dsat.scores[i]);
-        }
-      }
-      user.dsat.maximum= max;
-      console.log(user.dsat.maximum);
-      }
-    {
-      var min=parseInt(user.dsat.scores[0]);
-      for(var i=0;i< user.dsat.scores.length; i++){
-        if(parseInt(user.dsat.scores[i])< min){
-          min=parseInt(user.dsat.scores[i]);
-        }
-      }
-      user.dsat.minimum = min;
-      console.log(min);
-    }
-
+ 
     console.log(user.dsat.average);
     console.log(user.dsat.scores.length);
     console.log(user.dsat.scores);
