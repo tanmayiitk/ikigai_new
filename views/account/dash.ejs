@@ -13,8 +13,6 @@
         aria-controls="v-pills-profile" aria-selected="false" style="border-style: solid; border-color: #D3D3D3; margin:2px 0px;">DSAT Scores</a>
       <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
         aria-controls="v-pills-messages" aria-selected="false" style="border-style: solid; border-color: #D3D3D3; margin:2px 0px;">Updates</a>
-      <!-- <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
-        aria-controls="v-pills-settings" aria-selected="false" style="border-style: solid;border-color: #D3D3D3; margin:2px 0px;">Settings</a> -->
     </div>
   </div>
   <div class="col-9 container" style="height: 600px;">
@@ -31,9 +29,6 @@
                 <li class="nav-item">
                     <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Contact Info</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">other info</a>
-                </li> -->
             </ul>
             <div class="tab-content py-4">
                 <div class="tab-pane active" id="profile">
@@ -53,13 +48,6 @@
                            <% for(var i=0; i < skill.length; i++) { %>
                             <a href="#" class="badge badge-dark badge-pill"><%= skill[i] %></a>
                             <% } %>
-                           <!--  <a href="#" class="badge badge-dark badge-pill">react</a>
-                            <a href="#" class="badge badge-dark badge-pill">codeply</a>
-                            <a href="#" class="badge badge-dark badge-pill">angularjs</a>
-                            <a href="#" class="badge badge-dark badge-pill">css3</a>
-                            <a href="#" class="badge badge-dark badge-pill">jquery</a>
-                            <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
-                            <a href="#" class="badge badge-dark badge-pill">responsive-design</a> -->
                             <hr>
                             <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
                             <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
@@ -111,11 +99,6 @@
                                    <span class="float-right font-weight-bold"><%= user.profile.location %></span>Location :
                                 </td>
                             </tr>
-                            <!-- <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
-                                </td>
-                            </tr> -->
                         </tbody> 
                     </table>
                 </div>
@@ -131,20 +114,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-       <!--  <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="https://www.electronicdesign.com/sites/electronicdesign.com/files/styles/article_featured_standard/public/0718TR_Promo.jpg?itok=i5IRL7Kk" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Machine Learning</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Take Me to the Course</a>
-          </div>
-        </div> -->
       </div>
 
 
@@ -176,28 +145,16 @@
                       <p class="card-text">Conducted On : </p>
                     </div>
               </div>
-               <!--  <div class="card col-md-3 col-sm-6">
-                    <div class = " card-body ">                    
-                        <div class="caption">
-                            <h4> DSAT <%=i%> : <%= score %></h4><br>
-                            <% i++ ;%>
-                        </div>
-                    </div>
-                </div> -->
             <% }); %>
            </div>
         </div>
       <div class="tab-pane fade embed-responsive embed-responsive-16by9" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"> 
        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ftheikigailab%2Fvideos%2F770381779966840%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:auto;max-width: 100%;" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
       </div>
-          
-       <!--  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> -->
     </div>
   </div>
 </div>
-  </div>
-  
-
+</div>
 </div>
 <div >
 <% include ../partials/footer %>
