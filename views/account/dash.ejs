@@ -11,12 +11,16 @@
         aria-controls="v-pills-profile" aria-selected="false" style="border-style: solid; border-color: #D3D3D3; margin:2px 0px;">DSAT Scores</a>
       <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
         aria-controls="v-pills-messages" aria-selected="false" style="border-style: solid; border-color: #D3D3D3; margin:2px 0px;">Updates</a>
+<<<<<<< HEAD
       <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
         aria-controls="v-pills-settings" aria-selected="false" style="border-style: solid;border-color: #D3D3D3; margin:2px 0px;">Settings</a>
+=======
+>>>>>>> af5a9e7550b9ed6330115c6a4479e85bedfd98da
     </div>
   </div>
   <div class="col-9">
     <div class="tab-content" id="v-pills-tabContent">
+<<<<<<< HEAD
       	<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
      		<div class="card" style="width: 18rem;">
           <img class="card-img-top" src="https://www.electronicdesign.com/sites/electronicdesign.com/files/styles/article_featured_standard/public/0718TR_Promo.jpg?itok=i5IRL7Kk" alt="Card image cap">
@@ -24,6 +28,115 @@
             <h5 class="card-title">Machine Learning</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <a href="#" class="btn btn-primary">Take Me to the Course</a>
+=======
+
+      <div class="tab-pane fade show active" id="v-pills-userprofile" role="tabpanel" aria-labelledby="v-pills-userprofile-tab">
+       <div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Contact Info</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3"><strong><%= user.profile.firstname + " " + user.profile.lastname %></strong></h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                             <%= user.profile.qualification %>
+                            </p>
+                            <p>
+                             <%= user.profile.gender + "\t"+ user.profile.age %> 
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                             <% var skill=user.profile.experience.split(",");%>
+                            <h6>Skills and Experience</h6>
+                           <% for(var i=0; i < skill.length; i++) { %>
+                            <a href="#" class="badge badge-dark badge-pill"><%= skill[i] %></a>
+                            <% } %>
+                            <hr>
+                            <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
+                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><strong>Notifications</strong></h5>
+                            <table class="table table-sm table-hover table-striped">
+                                <tbody>                                    
+                                    <tr>
+                                        <td>
+                                            DSAT to be live soon! Stay tuned for Updates!
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Registrations for DSAT are now open. Click on Register for DSAT tab for more.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <div class="tab-pane" id="messages">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a>  Verify the contact details carefully to ensure uninterrupted flow of services.
+                    </div>
+                    <table class="table table-hover table-striped">
+                        <tbody>                                    
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold"><%=user.email%></span> Email address :
+                            </tr>
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold"><%= user.profile.mobile %></span>Mobile :
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold"><%= user.profile.website?user.profile.website:"N/A" %></span> Website : 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold"><%= user.profile.location %></span>Location :
+                                </td>
+                            </tr>
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="<%=user.gravatar() %>" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <h6 class="mt-2"></h6>
+            <form action="/account">
+            <button class="btn btn btn-primary" type="submit">
+                <i class="fas fa-pencil-alt fa-sm"></i>Update Profile</button>
+              </form>
+        </div>
+    </div>
+</div>
+      </div>
+
+
+        <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="https://www.electronicdesign.com/sites/electronicdesign.com/files/styles/article_featured_standard/public/0718TR_Promo.jpg?itok=i5IRL7Kk" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><strong>PGP-Data Science</strong></h5>
+            <p class="card-text">It is a classroom style seven month weekend program to initiate students into Data science.<br><br>Duration : 7 months</p>
+            <a href="#" class="btn btn-primary">Learn More</a>
+>>>>>>> af5a9e7550b9ed6330115c6a4479e85bedfd98da
           </div>
         </div>
   		</div>
@@ -45,16 +158,9 @@
                       <p class="card-text">Conducted On : </p>
                     </div>
               </div>
-               <!--  <div class="card col-md-3 col-sm-6">
-                    <div class = " card-body ">                    
-                        <div class="caption">
-                            <h4> DSAT <%=i%> : <%= score %></h4><br>
-                            <% i++ ;%>
-                        </div>
-                    </div>
-                </div> -->
             <% }); %>
            </div>
+<<<<<<< HEAD
 	  	  </div>
 		  <div class="tab-pane fade embed-responsive embed-responsive-16by9" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"> 
 		    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
@@ -62,12 +168,16 @@
 		  </div>
 		      
 	      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+=======
+        </div>
+      <div class="tab-pane fade embed-responsive embed-responsive-16by9" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"> 
+       <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ftheikigailab%2Fvideos%2F770381779966840%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:auto;max-width: 100%;" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+      </div>
+>>>>>>> af5a9e7550b9ed6330115c6a4479e85bedfd98da
     </div>
   </div>
 </div>
-  </div>
-  
-
+</div>
 </div>
 <div >
 <% include ../partials/footer %>
