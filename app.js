@@ -20,6 +20,8 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const ejsLint = require('ejs-lint');
+var checksum = require('./models/checksum');
+var config = require('./config/config');
 
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
@@ -27,7 +29,7 @@ const upload = multer({ dest: path.join(__dirname, 'uploads') });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env' });
+dotenv.load({ path: '.env.example' });
 
 /**
  * Controllers (route handlers).
@@ -91,6 +93,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
 app.use((req, res, next) => {
   if (req.path === '/api/upload') {
     next();
@@ -268,6 +271,56 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+/**
+ * Payment Integration.
+ */
+app.get('/payment', function(req,res){
+    console.log("Payment Page");
+    res.render('account/payment.ejs',{'config' : config , 'title':"Hello"});
+  });
+// Post method
+  app.post('/payment',function(req, res) {
+        console.log("POST Order start");
+        var paramlist = req.body;
+        var paramarray = new Array();
+        console.log('das',paramlist);
+        for (name in paramlist)
+        {
+          if (name == 'PAYTM_MERCHANT_KEY') {
+               var PAYTM_MERCHANT_KEY = paramlist[name] ; 
+            }else
+            { 
+            paramarray[name] = paramlist[name] ;
+            }
+        }
+        paramarray['CALLBACK_URL'] = 'http://localhost:7070/response';  // in case if you want to send callback
+        console.log('sakti', paramarray);
+
+        checksum.genchecksum(paramarray, PAYTM_MERCHANT_KEY, function (err, result) 
+        {
+              console.log('raj',result);
+           res.render('account/paymentredirect.ejs',{ 'restdata' : result });
+        });
+        console.log("Post");
+ });
+  app.get('/redirect', function(req,res){
+    console.log("in pgdirect");
+    console.log("Payment....");
+    res.render('account/paymentredirect.ejs');
+  });
+  app.post('/response', function(req,res){
+        console.log("in response post");
+        var paramlist = req.body;
+        if(checksum.verifychecksum(paramlist, config.PAYTM_MERCHANT_KEY))
+        {
+               console.log("success");
+               res.render('account/paymentresponse.ejs',{ 'restdata' : "true" ,'paramlist' : paramlist});
+        }else
+        {
+           console.log("failure");
+          res.render('account/paymentresponse.ejs',{ 'restdata' : "false" , 'paramlist' : paramlist});
+        };
+  });
 /**
  * Start Express server.
  */
