@@ -43,7 +43,15 @@ const userSchema = new mongoose.Schema({
     maximum: {type: Number,default:0},
     minimum: {type: Number, default: 0},
     average: { type:  Number,default:0},
+  },
+
+  payment:
+  {
+    orderid: {type: String, default:"not_paid"},
+    paymentstatus:{type: String,default:"not_paid"},
+    testsleft: {type: Number, default: 0}
   }
+
 }, { timestamps: true });
 
 

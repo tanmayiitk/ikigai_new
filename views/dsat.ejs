@@ -6,8 +6,34 @@
     ============================-->
     <section id="about">
       <div class="container">
+      
 
         <header class="section-header" style="padding-top: 50px">
+             <% if(user&&(user.payment.testsleft > 0)){ %>
+      <% var testLinks = ["https://assess.wecreateproblems.com/quizzes/e3a4a4ab-6d23-44f3-9863-ff2ded66ef57","https://assess.wecreateproblems.com/quizzes/57a55547-9e5c-4aec-b4c9-a8bccdc72aea","https://assess.wecreateproblems.com/quizzes/16f1898e-df59-4ea1-b4f7-9d686e1d9926"]; %>
+      <div class="container" style="text-align:center;padding-bottom: 20px;padding-top: 20px;">
+          <a href="<%= testLinks[Math.floor(Math.random()*3)]%>" class="btn btn btn-primary">Continue to DSAT</a>
+      </div>
+
+      <% } else{ %>
+          <div class="container" style="text-align:center;padding-bottom: 20px;padding-top: 20px;">
+          <a href="/paywithpaytm" class="btn btn btn-primary">Pay Now !</a>
+          </div>
+          <div>
+        <form action="/redeem" method="POST">
+            <input type="hidden" name="_csrf" value="<%=_csrf %>" />
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label font-weight-bold text-right" for="coupon">Redeem Coupon. Get a DSAT free.</label>
+                <div class="col-md-7">
+                    <input class="form-control" type="text" name="coupon" id="coupon"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="offset-sm-3 col-md-7 pl-2"><button class="btn btn-primary" type="submit"><i class="fas fa-lock fa-sm"></i>Change Password</button></div>
+            </div>
+        </form>
+       </div>
+      <% } %>
           <h3>About DSAT</h3>
           <p>Data science aptitude is based on Sternberg Theory  of intelligence and aims to evaluate “Analytical Intelligence of the candidate .Analytical Intelligence is the kind of intelligence which helps one in decipher complex scenarios and draw patterns out of it.</p>
         </header>

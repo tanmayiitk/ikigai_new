@@ -21,15 +21,22 @@ const sass = require('node-sass-middleware');
 const multer = require('multer');
 const ejsLint = require('ejs-lint');
 var checksum = require('./models/checksum');
+const User = require('./models/User');
 var config = require('./config/config');
+var https = require('https')
+var fs = require('fs');
+const cors = require("cors");
+dotenv.config();
 
+
+const {initPayment, responsePayment} = require("./paytm/services/index");
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env.example' });
+dotenv.load({ path: '.env' });
 
 /**
  * Controllers (route handlers).
@@ -39,6 +46,11 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
+var certOptions = {
+  key: fs.readFileSync(path.resolve('server.key')),
+  cert: fs.readFileSync(path.resolve('server.crt'))
+}
+
 /**
  * API keys and Passport configuration.
  */
@@ -47,8 +59,12 @@ const passportConfig = require('./config/passport');
 /**
  * Create Express server.
  */
-const app = express();
+// const app = express();
 
+
+var app = express();
+
+var server = https.createServer(certOptions, app).listen(443);
 /**
  * Connect to MongoDB.
  */
@@ -76,6 +92,8 @@ app.use(sass({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public')
 }));
+
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -95,7 +113,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
+  if ((req.path === '/api/upload')||(req.path === '/paywithpaytmresponse')) {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -169,6 +187,46 @@ app.get('/dsat',function(req,res){
   
 });
 app.get('/aboutUs', function(req,res){res.render('aboutUs', {title: "aboutUs"});});
+
+
+
+
+app.get("/paywithpaytm", (req, res) => {
+    initPayment(300).then(
+        success => {
+            res.render("paytmRedirect.ejs", {
+                resultData: success,
+                paytmFinalUrl: process.env.PAYTM_FINAL_URL
+            });
+        },
+        error => {
+            res.send(error);
+        }
+    );
+});
+
+app.post("/paywithpaytmresponse", (req, res) => {
+    responsePayment(req.body).then(
+        success => {
+            User.findById(req.user.id, (err, user) => {
+            if (err) { return next(err); }
+             user.payment.orderid = req.body.ORDERID;
+             user.payment.paymentstatus = req.body.STATUS;
+             if(req.body.STATUS != 'TXN_FAILURE'){
+               user.payment.testsleft = user.payment.testsleft + 3;
+             }
+              user.save((err) => {
+              if (err) { return next(err); }
+               req.flash('success', { msg: 'Payment Updated.' });
+            });
+            });
+            res.render("response.ejs", {resultData: "true", responseData: success});
+        },
+        error => {
+            res.send(error);
+        }
+    );
+});
 
 
 
@@ -274,59 +332,59 @@ if (process.env.NODE_ENV === 'production') {
 /**
  * Payment Integration.
  */
-app.get('/payment', function(req,res){
-    console.log("Payment Page");
-    res.render('account/payment.ejs',{'config' : config , 'title':"Hello"});
-  });
-// Post method
-  app.post('/payment',function(req, res) {
-        console.log("POST Order start");
-        var paramlist = req.body;
-        var paramarray = new Array();
-        console.log('das',paramlist);
-        for (name in paramlist)
-        {
-          if (name == 'PAYTM_MERCHANT_KEY') {
-               var PAYTM_MERCHANT_KEY = paramlist[name] ; 
-            }else
-            { 
-            paramarray[name] = paramlist[name] ;
-            }
-        }
-        paramarray['CALLBACK_URL'] = 'http://localhost:7070/response';  // in case if you want to send callback
-        console.log('sakti', paramarray);
+// app.get('/payment', function(req,res){
+//     console.log("Payment Page");
+//     res.render('account/payment.ejs',{'config' : config , 'title':"Hello"});
+//   });
+// // Post method
+//   app.post('/payment',function(req, res) {
+//         console.log("POST Order start");
+//         var paramlist = req.body;
+//         var paramarray = new Array();
+//         console.log('das',paramlist);
+//         for (name in paramlist)
+//         {
+//           if (name == 'PAYTM_MERCHANT_KEY') {
+//                var PAYTM_MERCHANT_KEY = paramlist[name] ; 
+//             }else
+//             { 
+//             paramarray[name] = paramlist[name] ;
+//             }
+//         }
+//         paramarray['CALLBACK_URL'] = 'http://localhost:4000/response';  // in case if you want to send callback
+//         console.log('sakti', paramarray);
 
-        checksum.genchecksum(paramarray, PAYTM_MERCHANT_KEY, function (err, result) 
-        {
-              console.log('raj',result);
-           res.render('account/paymentredirect.ejs',{ 'restdata' : result });
-        });
-        console.log("Post");
- });
-  app.get('/redirect', function(req,res){
-    console.log("in pgdirect");
-    console.log("Payment....");
-    res.render('account/paymentredirect.ejs');
-  });
-  app.post('/response', function(req,res){
-        console.log("in response post");
-        var paramlist = req.body;
-        if(checksum.verifychecksum(paramlist, config.PAYTM_MERCHANT_KEY))
-        {
-               console.log("success");
-               res.render('account/paymentresponse.ejs',{ 'restdata' : "true" ,'paramlist' : paramlist});
-        }else
-        {
-           console.log("failure");
-          res.render('account/paymentresponse.ejs',{ 'restdata' : "false" , 'paramlist' : paramlist});
-        };
-  });
+//         checksum.genchecksum(paramarray, PAYTM_MERCHANT_KEY, function (err, result) 
+//         {
+//               console.log('raj',result);
+//            res.render('account/paymentredirect.ejs',{ 'restdata' : result });
+//         });
+//         console.log("Post");
+//  });
+//   app.get('/redirect', function(req,res){
+//     console.log("in pgdirect");
+//     console.log("Payment....");
+//     res.render('account/paymentredirect.ejs');
+//   });
+//   app.post('/response', function(req,res){
+//         console.log("in response post");
+//         var paramlist = req.body;
+//         if(checksum.verifychecksum(paramlist, config.PAYTM_MERCHANT_KEY))
+//         {
+//                console.log("success");
+//                res.render('account/paymentresponse.ejs',{ 'restdata' : "true" ,'paramlist' : paramlist});
+//         }else
+//         {
+//            console.log("failure");
+//           res.render('account/paymentresponse.ejs',{ 'restdata' : "false" , 'paramlist' : paramlist});
+//         };
+//   });
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), () => {
-  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
-  console.log('  Press CTRL-C to stop\n');
-});
+// server.listen(app.get('port'), () => {
+//   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
+//   console.log('  Press CTRL-C to stop\n');
+// });
 
 module.exports = app;
