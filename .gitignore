@@ -57,3 +57,5 @@ Thumbs.db
 .com.apple.timemachine.donotpresent
 
 .env.example
+server.crt
+server.key

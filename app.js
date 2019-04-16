@@ -46,10 +46,10 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
-var certOptions = {
-  key: fs.readFileSync(path.resolve('server.key')),
-  cert: fs.readFileSync(path.resolve('server.crt'))
-}
+// var certOptions = {
+//   key: fs.readFileSync(path.resolve('server.key')),
+//   cert: fs.readFileSync(path.resolve('server.crt'))
+// }
 
 /**
  * API keys and Passport configuration.
@@ -64,7 +64,10 @@ const passportConfig = require('./config/passport');
 
 var app = express();
 
-var server = https.createServer(certOptions, app).listen(443);
+// var server = https.createServer(certOptions, app).listen(443,() => {
+//   console.log('%s App is running at https://localhost', chalk.green('✓'));
+//   console.log('  Press CTRL-C to stop\n');
+// });
 /**
  * Connect to MongoDB.
  */
@@ -229,6 +232,38 @@ app.post("/paywithpaytmresponse", (req, res) => {
 });
 
 
+app.post("/redeem", function(req,res){
+  console.log("Redeem Code");
+  if(req.body.coupon == "FIRSTDSAT"){
+       User.findById(req.user.id, (err, user) => {
+            if (err) { return next(err); }
+               user.payment.testsleft = user.payment.testsleft + 1;
+             
+              user.save((err) => {
+              if (err) { return next(err); }
+               req.flash('success', { msg: 'You are eligible for one free DSAT' });
+            });
+            });
+  }
+  res.redirect("dsat");
+});
+app.post("/dsat_attempt", function(req,res){
+  console.log("dsat_attempt called");
+   var testLinks = ["https://assess.wecreateproblems.com/quizzes/e3a4a4ab-6d23-44f3-9863-ff2ded66ef57",
+                    "https://assess.wecreateproblems.com/quizzes/57a55547-9e5c-4aec-b4c9-a8bccdc72aea",
+                    "https://assess.wecreateproblems.com/quizzes/16f1898e-df59-4ea1-b4f7-9d686e1d9926"
+                  ]; 
+      User.findById(req.user.id, (err, user) => {
+            if (err) { return next(err); }
+               user.payment.testsleft = user.payment.testsleft - 1;
+             
+              user.save((err) => {
+              if (err) { return next(err); }
+               req.flash('success', { msg: 'You are eligible for one free DSAT' });
+            });
+            });
+      res.redirect(testLinks[Math.floor(Math.random()*3)]);
+});
 
 /**
  * API examples routes.
@@ -382,9 +417,9 @@ if (process.env.NODE_ENV === 'production') {
 /**
  * Start Express server.
  */
-// server.listen(app.get('port'), () => {
-//   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
-//   console.log('  Press CTRL-C to stop\n');
-// });
+app.listen(app.get('port') , () => {
+  console.log('%s App is running at https://localhost', chalk.green('✓'),app.get('port'),app.get('env'));
+  console.log('  Press CTRL-C to stop\n');
+});
 
 module.exports = app;
