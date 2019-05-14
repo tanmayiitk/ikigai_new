@@ -195,7 +195,7 @@ app.get('/aboutUs', function(req,res){res.render('aboutUs', {title: "aboutUs"});
 
 
 app.get("/paywithpaytm", (req, res) => {
-    initPayment(300).then(
+    initPayment(499).then(
         success => {
             res.render("paytmRedirect.ejs", {
                 resultData: success,
